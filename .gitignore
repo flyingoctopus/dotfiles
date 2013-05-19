@@ -1,0 +1,34 @@
+# Added by gemignore. Snippet 'Global/OSX'
+.DS_Store
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Added by gemignore. Snippet 'Rails'
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+
+# https://raw.github.com/github/gitignore/master/Global/vim.gitignore
+.*.sw[a-z]
+*.un~
+Session.vim
+*~
+tags
