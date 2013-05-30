@@ -30,9 +30,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 
-# export PATH=/opt/scala/current/bin:/usr/local/git/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/mysql/bin
-
-source ~/.bash_profile
+if [ -f ~/.bash_profile ]; then
+   source ~/.bash_profile
+fi
 
 alias rspec='nocorrect rspec'
 
