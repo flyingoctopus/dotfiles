@@ -1,5 +1,6 @@
 alias wget="curl -O"
 alias rmdsstore="find . -name .DS_Store -exec rm {} \;"
+alias vim="mvim -v"
 
 alias ..='cd ..'
 alias ...='cd ../../'

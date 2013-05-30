@@ -1,0 +1,41 @@
+[user]
+  name = Pablo Cantero
+  email = pablo@pablocantero.com
+[color]
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
+[core]
+  editor = vim -f
+  excludesfile = /Users/pablo/.gitignore
+[merge]
+  tool = diffmerge
+[help]
+  format = man
+[github]
+  token = 076a1854deea25b5e3712fe2ba7ffd59
+  user = phstc
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  co = checkout
+  df = diff
+  b = branch -a
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an, %cr)%Creset' --abbrev-commit --date=relative
+  fu = fetch upstream master
+  fupum =!git checkout master && git fetch upstream master && git pull upstream master
+  fupup =!git checkout production && git fetch upstream production && git pull upstream production
+  rebasemaster = !branch=\"`git branch 2>/dev/null | grep \\* | awk '{ print $2 }'`\" && echo \"Rebasing $branch from master...\" && git fupum && git co $branch && git rebase master
+[mergetool "diffmerge"]
+  cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+  trustExitCode = true
+[mergetool]
+  keepBackup = false
+[diff]
+  tool = diffmerge
+[difftool "diffmerge"]
+  cmd = diffmerge $LOCAL $REMOTE
+[branch]
+  autosetupmerge = true
