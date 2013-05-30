@@ -32,3 +32,9 @@ export EDITOR=vim
 export TERM=screen-256color vi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+# http://www.iterm2.com/#/section/faq
+# Q: How do I change a tab's title?
+function set_title_tab {
+  echo -e "\033];$1\007"
+}
