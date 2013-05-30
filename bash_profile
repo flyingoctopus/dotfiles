@@ -38,3 +38,9 @@ export TERM=screen-256color vi
 function set_title_tab {
   echo -e "\033];$1\007"
 }
+
+# http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
+if [ -f ~/.bashrc ]; then
+   source ~/.bashrc
+fi
+
