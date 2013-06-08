@@ -400,3 +400,7 @@ let NERDRemoveExtraSpaces = 1
 map <Leader>ctall :!ctags --extra=+f -R *<CR><CR>
 map <Leader>ct :!ctags --extra=+f -R app/<CR><CR>
 
+" https://rvm.io/integration/vim/
+set shell=/bin/sh
+
+
