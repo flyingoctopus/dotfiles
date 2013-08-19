@@ -1,5 +1,4 @@
 export PATH="/usr/local/git/bin:$PATH"
-export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 export NODE_PATH="/usr/local/bin/node"
 
@@ -11,8 +10,6 @@ export LC_ALL=en_US.UTF-8
 
 export EDITOR=vim
 export TERM=screen-256color vi
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 # http://superuser.com/a/183980/226855
 # http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
