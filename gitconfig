@@ -11,6 +11,7 @@
   excludesfile = /Users/pablo/.gitignore
 [merge]
   tool = diffmerge
+	ff = false
 [help]
   format = man
 [github]
@@ -35,3 +36,5 @@
   cmd = diffmerge $LOCAL $REMOTE
 [branch]
   autosetupmerge = true
+[pull]
+	rebase = true

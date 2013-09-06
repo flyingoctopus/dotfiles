@@ -17,3 +17,4 @@ if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
 
+alias ctagsbundler="bundle show --paths | xargs ctags -R --exclude=.git --exclude=coverage --exclude=log && ctags -R --exclude=.git --exclude=coverage --exclude=log"

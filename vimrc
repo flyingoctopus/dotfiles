@@ -397,8 +397,7 @@ let NERDDefaultNesting = 0
 let NERDSpaceDelims = 1
 let NERDRemoveExtraSpaces = 1
 
-map <Leader>ctall :!ctags --extra=+f -R *<CR><CR>
-map <Leader>ct :!ctags --extra=+f -R app/<CR><CR>
-
 set shell=$SHELL\ -l
 
+" Automatically removing all trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e

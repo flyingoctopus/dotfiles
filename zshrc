@@ -1,3 +1,7 @@
+# https://github.com/postmodern/chruby#configuration
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
+
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
@@ -24,7 +28,7 @@ DISABLE_AUTO_TITLE="true"
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git bundler brew gem npm node knife knife_ssh github heroku colorize coffee)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -34,7 +38,3 @@ if [ -f ~/.bash_profile ]; then
    source ~/.bash_profile
 fi
 
-alias rspec='nocorrect rspec'
-
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
