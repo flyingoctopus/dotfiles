@@ -35,6 +35,10 @@ task :install do
       link_file(file)
     end
   end
+
+  system 'git submodule init'
+  system 'git submodule update'
+  system 'git submodule -q foreach git pull -q origin master'
 end
 
 def replace_file(file)
