@@ -11,6 +11,7 @@ After a fresh clone of this repository, get the submodules with:
 
     git submodule init
     git submodule update
+    git submodule -q foreach git pull -q origin master
 
 (See [Git Submodules: Adding, Using, Removing, Updating](http://chrisjean.com/2009/04/20/git-submodules-adding-using-removing-and-updating/) for more information.)
 
