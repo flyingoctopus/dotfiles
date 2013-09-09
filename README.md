@@ -1,2 +1,6 @@
-dotfiles
-========
+# Usage
+
+```sh
+rake install
+```
+
