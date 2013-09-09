@@ -399,7 +399,10 @@ let NERDRemoveExtraSpaces = 1
 
 " https://github.com/postmodern/chruby/wiki/Vim
 " https://github.com/postmodern/chruby/issues/196#issuecomment-23828010
-"set shell=$SHELL\ -l
+" set shell=$SHELL\ -l
 
 " Automatically removing all trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+nnoremap <leader>ct :!ctags -R . `bundle show --paths`<cr>
+
