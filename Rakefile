@@ -2,6 +2,8 @@
 require 'rake'
 require 'erb'
 
+task default: [:install]
+
 desc "install the dot files into user's home directory"
 task :install do
   install_oh_my_zsh
@@ -36,6 +38,15 @@ task :install do
     end
   end
 
+  update_git_submodules
+end
+
+desc 'update git submodules'
+task :update do
+  update_git_submodules
+end
+
+def update_git_submodules
   system 'git submodule init'
   system 'git submodule update'
   system 'git submodule -q foreach git pull -q origin master'

@@ -29,6 +29,7 @@ DISABLE_AUTO_TITLE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git bundler brew gem npm node knife knife_ssh github heroku colorize coffee)
+# plugins=(git brew gem npm node knife knife_ssh github heroku colorize coffee)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -38,3 +39,6 @@ if [ -f ~/.bash_profile ]; then
    source ~/.bash_profile
 fi
 
+unalias knife
+
+unsetopt correct_all

@@ -1,4 +1,5 @@
 export PATH="/usr/local/git/bin:$PATH"
+export PATH="/Users/pablo/.cabal/bin:$PATH"
 
 export NODE_PATH="/usr/local/bin/node"
 

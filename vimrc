@@ -206,8 +206,8 @@ vmap <Leader>t: :Tabularize /:\zs<CR>
 nmap <Leader>ts :Tabularize /:/l1c0l0<CR>
 vmap <Leader>ts :Tabularize /:/l1c0l0<CR>
 " key, value
-nmap <Leader>t, :Tabularize /,<CR>
-vmap <Leader>t, :Tabularize /,<CR>
+nmap <Leader>t, :Tabularize /,\zs<CR>
+vmap <Leader>t, :Tabularize /,\zs<CR>
 
 " a few useful shortcuts - taken from https://github.com/lsdr/vim-folder/blob/master/_vimrc :)
 command! Rehash source ~/.vimrc

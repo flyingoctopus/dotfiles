@@ -28,3 +28,4 @@ function set_title_tab {
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
 alias ctagsbundler="bundle show --paths | xargs ctags -R --exclude=.git --exclude=coverage --exclude=log && ctags -R --exclude=.git --exclude=coverage --exclude=log"
+
