@@ -1,6 +1,9 @@
 # https://github.com/postmodern/chruby#configuration
-source /usr/local/opt/chruby/share/chruby/chruby.sh
-source /usr/local/opt/chruby/share/chruby/auto.sh
+# http://pbrisbin.com/posts/chruby/
+source /usr/local/share/chruby/chruby.sh
+source /usr/local/share/chruby/auto.sh
+chruby $(cat ~/.ruby-version)
+
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -26,19 +29,17 @@ DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler brew gem npm node knife knife_ssh github heroku colorize coffee)
-# plugins=(git brew gem npm node knife knife_ssh github heroku colorize coffee)
-
-source $ZSH/oh-my-zsh.sh
-
 # Customize to your needs...
-
 if [ -f ~/.bash_profile ]; then
    source ~/.bash_profile
 fi
 
-unalias knife
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Example format: plugins=(rails git textmate ruby lighthouse)
+plugins=(git brew bundler gem knife knife_ssh github heroku colorize coffee)
 
+source $ZSH/oh-my-zsh.sh
+
+# unalias knife
 unsetopt correct_all
+

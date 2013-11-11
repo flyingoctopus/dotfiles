@@ -1,0 +1,3 @@
+--ignore-dir=coverage
+--ignore-dir=log
+--ignore-dir=tags

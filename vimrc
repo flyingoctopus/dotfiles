@@ -197,17 +197,23 @@ vmap <Leader>t= :Tabularize /=<CR>
 nmap <Leader>t{ :Tabularize /{<CR>
 vmap <Leader>t{ :Tabularize /{<CR>
 " key => value
-nmap <Leader>t> :Tabularize /=><CR>
-vmap <Leader>t> :Tabularize /=><CR>
+nmap <Leader>t=> :Tabularize /><CR>
+vmap <Leader>t=> :Tabularize /><CR>
 " key: value
 nmap <Leader>t: :Tabularize /:\zs<CR>
 vmap <Leader>t: :Tabularize /:\zs<CR>
 " Ruby symbols
-nmap <Leader>ts :Tabularize /:/l1c0l0<CR>
-vmap <Leader>ts :Tabularize /:/l1c0l0<CR>
+" nmap <Leader>ts :Tabularize /:/l1c0l0<CR>
+" vmap <Leader>ts :Tabularize /:/l1c0l0<CR>
 " key, value
 nmap <Leader>t, :Tabularize /,\zs<CR>
 vmap <Leader>t, :Tabularize /,\zs<CR>
+
+
+" CTRL ]
+" g CTRL ]
+nmap <Leader>ts :tselect<CR>
+vmap <Leader>ts :tselect<CR>
 
 " a few useful shortcuts - taken from https://github.com/lsdr/vim-folder/blob/master/_vimrc :)
 command! Rehash source ~/.vimrc
@@ -399,10 +405,12 @@ let NERDRemoveExtraSpaces = 1
 
 " https://github.com/postmodern/chruby/wiki/Vim
 " https://github.com/postmodern/chruby/issues/196#issuecomment-23828010
-" set shell=$SHELL\ -l
+set shell=$SHELL\ -l
+" set shell=zsh\ -i
+" set shellcmdflag=-ci
 
 " Automatically removing all trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
-nnoremap <leader>ct :!ctags -R . `bundle show --paths`<cr>
+nnoremap <leader>ct :!`brew --prefix`/bin/ctags -R --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
 

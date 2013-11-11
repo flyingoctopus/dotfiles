@@ -10,7 +10,7 @@
   editor = vim -f
   excludesfile = /Users/pablo/.gitignore
 [merge]
-  tool = diffmerge
+	tool = diffmerge
 	ff = false
 [help]
   format = man
@@ -26,10 +26,10 @@
   b = branch -a
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an, %cr)%Creset' --abbrev-commit --date=relative
 [mergetool "diffmerge"]
-  cmd = "diffmerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$(if test -f \"$BASE\"; then echo \"$BASE\"; else echo \"$LOCAL\"; fi)\" \"$REMOTE\""
+	cmd = /Applications/DiffMerge.app/Contents/MacOS/diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
   trustExitCode = true
 [mergetool]
-  keepBackup = false
+	keepBackup = false
 [diff]
   tool = diffmerge
 [difftool "diffmerge"]

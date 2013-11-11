@@ -8,24 +8,22 @@ alias ....='cd ../../../'
 alias .....='cd ../../../../'
 alias ......='cd ../../../../../'
 
-# http://ryan.mcgeary.org/2011/02/09/vendor-everything-still-applies/
 alias b="bundle"
-# alias bi="b install --path vendor"
 alias bi="b install"
-alias bil="bi --local"
 alias bu="b update"
 alias be="b exec"
-alias binit="bi && b package && echo 'vendor/ruby' >> .gitignore"
+
+# http://ryan.mcgeary.org/2011/02/09/vendor-everything-still-applies/
+# alias bil="bi --local"
+# alias bi="b install --path vendor"
+# alias binit="bi && b package && echo 'vendor/ruby' >> .gitignore"
 
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
-# http://www.iterm2.com/#/section/faq
-# Q: How do I change a tab's title?
-function set_title_tab {
-  echo -e "\033];$1\007"
-}
+alias ctags="`brew --prefix`/bin/ctags"
 
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
 
-alias ctagsbundler="bundle show --paths | xargs ctags -R --exclude=.git --exclude=coverage --exclude=log && ctags -R --exclude=.git --exclude=coverage --exclude=log"
+alias gist="gist -p -c"
+alias json="python -m json.tool"
 
