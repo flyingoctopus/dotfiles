@@ -417,4 +417,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 nnoremap <leader>ct :!`brew --prefix`/bin/ctags -R --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
 
+" brew install yajl
+command JsonVerify execute "! cat % | json_verify"
+command JsonBeautify execute "%! json_reformat"
+command JsonMinify execute "%! json_reformat -m"
+command EndpointVerify execute "!BUNDLE_GEMFILE=/Users/pablo/workspace/augury/Gemfile bundle exec /Users/pablo/workspace/augury/bin/validate --schema-path=/Users/pablo/workspace/augury_messages/lib/augury_messages/validators/schemas/endpoint/definition.json --json-path=%:p"
 
