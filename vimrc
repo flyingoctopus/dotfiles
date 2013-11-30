@@ -405,12 +405,16 @@ let NERDRemoveExtraSpaces = 1
 
 " https://github.com/postmodern/chruby/wiki/Vim
 " https://github.com/postmodern/chruby/issues/196#issuecomment-23828010
-set shell=$SHELL\ -l
+" set shell=$SHELL\ -l
 " set shell=zsh\ -i
 " set shellcmdflag=-ci
+" https://github.com/postmodern/chruby/issues/196#issuecomment-23826171
+" set shell=bash
+set shell=zsh
 
 " Automatically removing all trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
 nnoremap <leader>ct :!`brew --prefix`/bin/ctags -R --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
+
 
