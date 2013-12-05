@@ -11,7 +11,7 @@
   excludesfile = /Users/pablo/.gitignore
 [merge]
 	tool = diffmerge
-	ff = false
+	ff = true
 [help]
   format = man
 [github]
