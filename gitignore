@@ -32,3 +32,4 @@ pickle-email-*.html
 Session.vim
 *~
 tags
+Berksfile.lock

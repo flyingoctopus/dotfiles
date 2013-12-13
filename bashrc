@@ -11,6 +11,7 @@ alias ......='cd ../../../../../'
 alias b="bundle"
 alias bi="b install"
 alias bu="b update"
+alias bump="bu --source"
 alias be="b exec"
 
 # http://ryan.mcgeary.org/2011/02/09/vendor-everything-still-applies/
@@ -26,4 +27,8 @@ alias ctags="`brew --prefix`/bin/ctags"
 
 alias gist="gist -p -c"
 alias json="python -m json.tool"
+alias influxdb="influxdb -config=/usr/local/etc/influxdb.conf"
 
+# ~/.bashrc
+alias clean_queues="mongo augury_development --eval \"db.incoming.remove(); db.accepted.remove(); db.archived.remove()\""
+alias clean_persistence="mongo persistence_development --eval \"db.orders.remove(); db.users.remove(); db.products.remove(); db.stock_transfers.remove()\""

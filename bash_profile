@@ -22,9 +22,14 @@ export TERM=screen-256color vi
 
 export ENDPOINT_KEY=12345678901234567890123456789012
 
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+# brew info bzr
+export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+
 # http://superuser.com/a/183980/226855
 # http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
-
