@@ -41,15 +41,22 @@ task :install do
   update_git_submodules
 end
 
-desc 'update git submodules'
+desc 'update git submodules & oh-my-zsh'
 task :update do
   update_git_submodules
+  update_oh_my_zsh
 end
 
 def update_git_submodules
+  puts 'updating git-submodules'
   system 'git submodule init'
   system 'git submodule update'
   system 'git submodule -q foreach git pull -q origin master'
+end
+
+def update_oh_my_zsh
+  puts 'updating oh-my-zsh'
+  system 'upgrade_oh_my_zsh'
 end
 
 def replace_file(file)
@@ -90,10 +97,17 @@ def switch_to_zsh
 end
 
 def install_oh_my_zsh
-  if File.exist?(File.join(ENV['HOME'], ".oh-my-zsh"))
-    puts "found ~/.oh-my-zsh"
+  if File.exist?(File.join(ENV['HOME'], '.oh-my-zsh'))
+    puts 'found ~/.oh-my-zsh'
+    print 'upgrade oh-my-zsh? [ynq] '
+    case $stdin.gets.chomp
+    when 'y'
+      update_oh_my_zsh
+    when 'q'
+      exit
+    end
   else
-    print "install oh-my-zsh? [ynq] "
+    print 'install oh-my-zsh? [ynq] '
     case $stdin.gets.chomp
     when 'y'
       puts "installing oh-my-zsh"
@@ -101,7 +115,8 @@ def install_oh_my_zsh
     when 'q'
       exit
     else
-      puts "skipping oh-my-zsh, you will need to change ~/.zshrc"
+      puts 'skipping oh-my-zsh, you will need to change ~/.zshrc'
     end
   end
 end
+
