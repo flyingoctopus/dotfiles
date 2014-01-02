@@ -32,3 +32,4 @@ alias influxdb="influxdb -config=/usr/local/etc/influxdb.conf"
 # ~/.bashrc
 alias clean_queues="mongo augury_development --eval \"db.incoming.remove(); db.accepted.remove(); db.archived.remove()\""
 alias clean_persistence="mongo persistence_development --eval \"db.orders.remove(); db.users.remove(); db.products.remove(); db.stock_transfers.remove()\""
+

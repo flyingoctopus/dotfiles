@@ -22,8 +22,9 @@ export TERM=screen-256color vi
 
 export ENDPOINT_KEY=12345678901234567890123456789012
 
+export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 
 # brew info bzr
 export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
