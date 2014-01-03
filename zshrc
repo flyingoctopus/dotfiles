@@ -36,7 +36,7 @@ fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(autojump git brew bundler2 gem knife knife_ssh github heroku colorize coffee)
+plugins=(autojump git brew bundler2 gem knife knife_ssh github heroku colorize coffee tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
