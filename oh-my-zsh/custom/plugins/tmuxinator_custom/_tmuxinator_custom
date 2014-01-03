@@ -10,19 +10,26 @@ _arguments -C \
 
 case $state in
   cmds)
-    _configs=(`find ~/.tmuxinator -name \*.yml | cut -d/ -f5 | sed s:.yml::g`)
-    _values "tmuxinator command" \
-        "start[start a tmux session using project's tmuxinator config]" \
-        "open[create a new project file and open it in your editor]" \
-        "copy[copy source_project project file to a new project called new_project]" \
-        "delete[deletes the project called project_name]" \
-        "implode[deletes all existing projects!]" \
-        "list[list all existing projects]" \
-        "doctor[look for problems in your configuration]" \
-        "help[shows this help document]" \
-        "version[shows tmuxinator version number]" \
-        $_configs \
-    ret=0
+    case $words[1] in
+      mux)
+        _configs=(`find ~/.tmuxinator -name \*.yml | cut -d/ -f5 | sed s:.yml::g`)
+        _values $_configs
+        ret=0
+        ;;
+      tmuxinator)
+        _values "tmuxinator command" \
+          "start[start a tmux session using project's tmuxinator config]" \
+          "open[create a new project file and open it in your editor]" \
+          "copy[copy source_project project file to a new project called new_project]" \
+          "delete[deletes the project called project_name]" \
+          "implode[deletes all existing projects!]" \
+          "list[list all existing projects]" \
+          "doctor[look for problems in your configuration]" \
+          "help[shows this help document]" \
+          "version[shows tmuxinator version number]"
+        ret=0
+        ;;
+    esac
     ;;
   args)
     case $line[1] in
