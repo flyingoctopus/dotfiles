@@ -415,7 +415,8 @@ set shell=zsh
 " Automatically removing all trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
-nnoremap <leader>ct :!`brew --prefix`/bin/ctags -R --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
+" git_template/hooks/ctags
+nnoremap <leader>ct :!`brew --prefix`/bin/ctags --tag-relative -Rf.git/tags --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
 
 " brew install yajl
 command JsonVerify execute "! cat % | json_verify"

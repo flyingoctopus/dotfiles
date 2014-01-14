@@ -33,3 +33,27 @@ alias influxdb="influxdb -config=/usr/local/etc/influxdb.conf"
 alias clean_queues="mongo augury_development --eval \"db.incoming.remove(); db.accepted.remove(); db.archived.remove()\""
 alias clean_persistence="mongo persistence_development --eval \"db.orders.remove(); db.users.remove(); db.products.remove(); db.stock_transfers.remove()\""
 
+alias ta='tmux attach-session -t'
+alias tl='tmux list-sessions'
+alias tn='tmux new -s'
+# tmux -S /tmp/pair
+# chmod 777 /tmp/pair
+# tmux -S /tmp/pair attach
+# http://remotepairprogramming.com/tagged/tmux
+# http://tmate.io/
+# SSH Tunneling
+# https://ngrok.com/
+
+func git_hooks_init() {
+  if [ -d .git ]
+  then
+    ln -s ~/.git_template/hooks/* .git/hooks
+  else
+    echo '.git does not exist'
+  fi
+
+  if [ -f tags ]
+  then
+    rm tags
+  fi
+}

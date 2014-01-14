@@ -36,10 +36,9 @@ fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(bundler_custom tmuxinator_custom autojump git brew gem knife knife_ssh github heroku coffee)
+plugins=(bundler_custom tmuxinator_custom autojump git brew gem knife knife_ssh github heroku coffee golang)
 
 source $ZSH/oh-my-zsh.sh
 
 unalias knife
 unsetopt correct_all
-
