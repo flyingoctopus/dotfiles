@@ -416,7 +416,8 @@ set shell=zsh
 autocmd BufWritePre * :%s/\s\+$//e
 
 " git_template/hooks/ctags
-nnoremap <leader>ct :!`brew --prefix`/bin/ctags --tag-relative -Rf.git/tags --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
+" nnoremap <leader>ct :!`brew --prefix`/bin/ctags --tag-relative -Rf.git/tags --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
+nnoremap <leader>ct :! /Users/pablo/.git_template/hooks/ctags<cr>
 
 " brew install yajl
 command JsonVerify execute "! cat % | json_verify"
