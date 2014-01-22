@@ -1,0 +1,5 @@
+project_name: go
+project_root: /Users/pablo/go
+
+windows:
+  - zsh:

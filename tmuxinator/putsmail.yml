@@ -1,0 +1,6 @@
+project_name: putsmail
+project_root: /Users/pablo/workspace
+windows:
+  - server:   cd /Users/pablo/workspace/putsmail && rails s
+  - vim:      cd /Users/pablo/workspace/putsmail && vim
+  - console:  cd /Users/pablo/workspace/putsmail
