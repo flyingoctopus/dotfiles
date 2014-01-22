@@ -48,12 +48,26 @@ func git_hooks_init() {
   if [ -d .git ]
   then
     ln -s ~/.git_template/hooks/* .git/hooks
+
+    # ~/.git_template/hooks/ctags will generate tags inside .git directory
+    if [ -f tags ]
+    then
+      rm tags
+    fi
   else
     echo '.git does not exist'
   fi
+}
 
-  if [ -f tags ]
+func git_hooks_remove() {
+  if [ -d .git ]
   then
-    rm tags
+    rm .git/hooks/*
+  else
+    echo '.git does not exist'
   fi
+}
+
+func set_tmux_pane_title() {
+  printf "\033]2;%s\033\\" "$*";
 }
