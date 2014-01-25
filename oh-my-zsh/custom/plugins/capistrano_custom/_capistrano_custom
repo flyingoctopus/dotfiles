@@ -17,8 +17,9 @@ _arguments -C \
 
 _cap_tasks() {
   if [[ ! -f .cap_tasks~ ]]; then
-    echo "\nGenerating .cap_tasks~..." > /dev/stderr
+    # echo "\nGenerating .cap_tasks~..." > /dev/stderr
     xcap -v --tasks | grep '#' | cut -d " " -f 2 > .cap_tasks~
+    # xcap -v --tasks | awk '{command=$2; $1=$2=$3=""; gsub(/^[ \t\r\n]+/, "", $0); print command"["$0"]"}' > .cap_tasks~
   fi
   cat .cap_tasks~
 }
