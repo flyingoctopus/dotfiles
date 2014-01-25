@@ -1,5 +1,9 @@
-#compdef capistrano cap xcap
+#compdef xcap
 #autoload
+
+# cap is a reserved word
+# https://stackoverflow.com/questions/21353937/is-cap-a-reserved-word-zsh-completion?noredirect=1#comment32196838_21353937
+# http://zsh.sourceforge.net/Doc/Release/Zsh-Modules.html#The-zsh_002fcap-Module
 
 # https://github.com/capistrano/capistrano/wiki/Capistrano-Tasks
 # http://askql.wordpress.com/2011/01/11/zsh-writing-own-completion/
@@ -14,7 +18,7 @@ _arguments -C \
 _cap_tasks() {
   if [[ ! -f .cap_tasks~ ]]; then
     echo "\nGenerating .cap_tasks~..." > /dev/stderr
-    cap -v --tasks | grep '#' | cut -d " " -f 2 > .cap_tasks~
+    xcap -v --tasks | grep '#' | cut -d " " -f 2 > .cap_tasks~
   fi
   cat .cap_tasks~
 }

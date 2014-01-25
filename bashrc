@@ -63,9 +63,9 @@ func git_hooks_init() {
 func git_hooks_remove() {
   if [ -d .git ]
   then
-    rm .git/hooks/*
+      rm .git/hooks/*
   else
-    echo '.git does not exist'
+      echo '.git does not exist'
   fi
 }
 
