@@ -1,0 +1,41 @@
+#compdef capistrano cap xcap
+#autoload
+
+# https://github.com/capistrano/capistrano/wiki/Capistrano-Tasks
+# http://askql.wordpress.com/2011/01/11/zsh-writing-own-completion/
+
+local curcontext="$curcontext" state line ret=1
+local -a _configs
+
+_arguments -C \
+  '1: :->cmds' \
+  '2:: :->args' && ret=0
+
+_cap_tasks() {
+  if [[ ! -f .cap_tasks~ ]]; then
+    echo "\nGenerating .cap_tasks~..." > /dev/stderr
+    cap -v --tasks | grep '#' | cut -d " " -f 2 > .cap_tasks~
+  fi
+  cat .cap_tasks~
+}
+
+_cap_stages() {
+  find config/deploy -name \*.rb | cut -d/ -f3 | sed s:.rb::g
+}
+
+case $state in
+  cmds)
+    if [[ -d config/deploy ]]; then
+      compadd `_cap_stages`
+    else
+      compadd `_cap_tasks`
+    fi
+    ret=0
+    ;;
+  args)
+    compadd `_cap_tasks`
+    ret=0
+    ;;
+esac
+
+return ret

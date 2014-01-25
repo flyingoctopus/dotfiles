@@ -1,8 +1,8 @@
 #compdef tmuxinator mux
 #autoload
 
-local curcontext="$curcontext" state line ret=1
-local -a _configs
+# local curcontext="$curcontext" state line ret=1
+# local -a _configs
 
 _arguments -C \
   '1: :->cmds' \

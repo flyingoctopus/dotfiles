@@ -1,0 +1,9 @@
+#!/bin/sh
+
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+BRANCH_NAME_IN_MESSAGE="`cat $1 | egrep \"\[$BRANCH_NAME\] \"`"
+
+# if [ -n "$BRANCH_NAME" ] && [ "$BRANCH_NAME_IN_MESSAGE" == "" ] && [ "$BRANCH_NAME" != "master" ]; then
+    # echo "[$BRANCH_NAME] $(cat $1)" > $1
+# fi
+echo $1
