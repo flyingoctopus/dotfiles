@@ -5,21 +5,23 @@
 # .vimrc calls this script `<leader>ct`.
 
 # See https://github.com/phstc/dotfiles/blob/master/bashrc#git_template_hooks_init
+# set -e causes the shell to exit if any subcommand or pipeline returns a non-zero status.
+# http://serverfault.com/a/416097
+set -e
+# PATH="/usr/local/bin:$PATH"
+
+# The trap command to catch the listed SIGNALS. If a signal is 0 or EXIT, the COMMANDS are executed when the shell exits.
+# http://redsymbol.net/articles/bash-exit-traps/
+# http://linux.die.net/Bash-Beginners-Guide/sect_12_02.html
+trap "rm -f .git/tags.$$" EXIT
+
 if [ -f Gemfile ]
 then
-  # set -e causes the shell to exit if any subcommand or pipeline returns a non-zero status.
-  # http://serverfault.com/a/416097
-  set -e
-  # PATH="/usr/local/bin:$PATH"
-
-  # The trap command to catch the listed SIGNALS. If a signal is 0 or EXIT, the COMMANDS are executed when the shell exits.
-  # http://redsymbol.net/articles/bash-exit-traps/
-  # http://linux.die.net/Bash-Beginners-Guide/sect_12_02.html
-  trap "rm -f .git/tags.$$" EXIT
-
-  # $$ is the current pid, which helps if two processes kick off at the same time.
-  # http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html#comment-995210438
-  `brew --prefix`/bin/ctags --tag-relative -Rf.git/tags.$$ --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`
-
-  mv .git/tags.$$ .git/tags
+  `brew --prefix`/bin/ctags --tag-relative -Rf.git/tags.$$ . `bundle show --paths`
+else
+  `brew --prefix`/bin/ctags --tag-relative -Rf.git/tags.$$ .
 fi
+
+# $$ is the current pid, which helps if two processes kick off at the same time.
+# http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html#comment-995210438
+mv .git/tags.$$ .git/tags

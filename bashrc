@@ -1,5 +1,6 @@
 alias wget="curl -O"
 alias rmdsstore="find . -name .DS_Store -exec rm {} \;"
+alias rmlogfiles="find . -name '*.log' -exec rm {} \;"
 alias vim="mvim -v"
 
 alias ..='cd ..'
