@@ -425,6 +425,7 @@ command JsonBeautify execute "%! json_reformat"
 command JsonMinify execute "%! json_reformat -m"
 command EndpointVerify execute "!BUNDLE_GEMFILE=/Users/pablo/workspace/augury/Gemfile bundle exec /Users/pablo/workspace/augury/bin/validate --schema-path=/Users/pablo/workspace/augury_messages/lib/augury_messages/validators/schemas/endpoint/definition.json --json-path=%:p"
 
+command SudoW execute ":silent w !sudo tee %" | :edit!
 
 " let g:airline_section_b = '%{getcwd()} branch'
 " let g:airline_section_c = '%t'
