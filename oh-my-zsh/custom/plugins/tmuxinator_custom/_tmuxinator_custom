@@ -1,19 +1,23 @@
 #compdef tmuxinator mux
 #autoload
 
-# local curcontext="$curcontext" state line ret=1
-# local -a _configs
+local curcontext="$curcontext" state line ret=1
+local -a _configs
 
 _arguments -C \
   '1: :->cmds' \
   '2:: :->args' && ret=0
 
+
+_mux_project_files(){
+  _values 'tmuxinator project config' $(find ~/.tmuxinator/* -name \*.yml | cut -d/ -f5 | sed s:.yml::g)
+}
+
 case $state in
   cmds)
     case $words[1] in
       mux)
-        _configs=(`find ~/.tmuxinator -name \*.yml | cut -d/ -f5 | sed s:.yml::g`)
-        _values $_configs
+        _mux_project_files
         ret=0
         ;;
       tmuxinator)
@@ -34,8 +38,7 @@ case $state in
   args)
     case $line[1] in
       start|open|copy|delete)
-        _configs=(`find ~/.tmuxinator -name \*.yml | cut -d/ -f5 | sed s:.yml::g`)
-        _values 'configs' $_configs
+        _mux_project_files
         ret=0
         ;;
     esac

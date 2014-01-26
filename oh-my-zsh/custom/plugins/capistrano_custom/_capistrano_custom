@@ -19,12 +19,13 @@ _cap_tasks() {
   if [[ ! -f .cap_tasks~ ]]; then
     # echo "\nGenerating .cap_tasks~..." > /dev/stderr
     # xcap -v --tasks | grep '#' | cut -d " " -f 2 > .cap_tasks~
-    xcap -v --tasks | awk '{{if (NR == 1) print "cap commands"}; command=$2; $1=$2=$3=""; gsub(/^[ \t\r\n]+/, "", $0); gsub(":", "\\:", command); print command"["$0"]"}' > .cap_tasks~
+    xcap -v --tasks | awk '{command=$2; $1=$2=$3=""; gsub(/^[ \t\r\n]+/, "", $0); gsub(":", "\\:", command); print command"["$0"]"}' > .cap_tasks~
   fi
 
   OLD_IFS=$IFS
   IFS=$'\n'
-  _values $(< .cap_tasks~)
+  # $(< shortcut for $(cat
+  _values 'cap commands' $(< .cap_tasks~)
   IFS=$OLD_IFS
   # https://stackoverflow.com/questions/21356370/how-to-pass-the-contents-of-a-file-using-cat-to-values-zsh-completion/21357799?noredirect=1#21357799
   # zmodload zsh/mapfile
