@@ -44,6 +44,14 @@ alias tn='tmux new -s'
 # http://tmate.io/
 # SSH Tunneling
 # https://ngrok.com/
+# record shell
+# http://showterm.io/
+#  $ showterm
+# https://github.com/icholy/ttygif
+#  $ ttyrec myrecording
+#  $ ./ttygif myrecording -f
+#  $ ./concat_osx.sh terminal.gif
+# http://asciinema.org/
 
 func git_hooks_init() {
   if [ -d .git ]
