@@ -52,6 +52,10 @@ alias tn='tmux new -s'
 #  $ ./ttygif myrecording -f
 #  $ ./concat_osx.sh terminal.gif
 # http://asciinema.org/
+# http://www.mkyong.com/mac/how-to-find-large-file-size-on-mac-os-x3/
+# Result – Find all files that have a size >= 100MB
+# sudo find / -type f -size +100000k -exec ls -lh {} \; | awk '{ print $9 ": " $5 }'
+
 
 func git_hooks_init() {
   if [ -d .git ]
@@ -80,3 +84,4 @@ func git_hooks_remove() {
 func set_tmux_pane_title() {
   printf "\033]2;%s\033\\" "$*";
 }
+

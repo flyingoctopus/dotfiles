@@ -394,7 +394,8 @@ nnoremap <leader>. :call SpecSwitcher()<cr>
 
 nnoremap <leader>dq :%s/'\([^"\|^']*\)'/"\1"/<cr>
 
-let g:ctrlp_custom_ignore = 'vendor/ruby/\|bin/\|node_modules/\|tmp/|coverage/'
+let g:ctrlp_custom_ignore = 'vendor/ruby/\|node_modules/\|tmp/|coverage/'
+" let g:ctrlp_custom_ignore = 'vendor/ruby/\|bin/\|node_modules/\|tmp/|coverage/'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_use_caching = 1
 
@@ -429,3 +430,19 @@ command SudoW execute ":silent w !sudo tee %" | :edit!
 
 " let g:airline_section_b = '%{getcwd()} branch'
 " let g:airline_section_c = '%t'
+
+" enable spell checking
+" http://www.danielmiessler.com/study/vim
+" # Go to the next misspelled word
+" ]s
+" # Go to the last misspelled word
+" [s
+" # When on a misspelled word, get some suggestions
+" z=
+" # Mark a misspelled word as correct
+" zg
+" # Mark a good word as misspelled
+" zw
+set spell
+hi clear SpellBad
+hi SpellBad cterm=underline
