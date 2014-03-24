@@ -84,4 +84,3 @@ func git_hooks_remove() {
 func set_tmux_pane_title() {
   printf "\033]2;%s\033\\" "$*";
 }
-

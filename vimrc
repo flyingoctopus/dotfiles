@@ -13,8 +13,6 @@ filetype plugin indent on         " Turn on file type detection.
 let mapleader=","
 nnoremap ; :
 
-ca W w
-
 runtime macros/matchit.vim        " Load matchit.vim plugin.
 
 set encoding=utf-8
@@ -75,32 +73,18 @@ set noequalalways                 " Resize windows as little as possible.
 
 set autoread                      " Automatically re-read files changed outside Vim.
 
-set t_Co=256
-set background=dark
-colorscheme badwolf
+let g:AutoPairs = { '(': ')', '[': ']', '{': '}', "'": "'", '"': '"', '`': '`', '<': '>', '%': '%' }
 
-let g:sql_type_default = "mysql"
+set t_Co=256
+set background=light
+colorscheme badwolf
 
 " Very magic regexes.
 nnoremap / /\v
 vnoremap / /\v
 
-" OS X-like space bar to scroll.
-" nnoremap <Space> <C-F>
-" nnoremap <S-Space> <C-B>
-
-" <Leader><space> turns off search highlighting.
+" turn off search highlighting.
 nnoremap <Leader><space> :noh<CR>
-
-" Kill trailing White Space
-nnoremap <Leader>kws :%s/\s\+$//<CR>
-
-" System clipboard interaction
-" From
-" https://github.com/henrik/dotfiles/blob/master/vim/config/mappings.vim
-noremap <leader>y "*y
-noremap <leader>p :set paste<CR>"*p<CR>:set nopaste<CR>
-noremap <leader>P :set paste<CR>"*P<CR>:set nopaste<CR>
 
 " http://vim.devth.com/put-paste-above-below
 " http://stackoverflow.com/questions/1346737/how-to-paste-in-a-new-line-with-vim
@@ -110,25 +94,6 @@ nmap <leader>pO O<Esc>p==
 " Emacs bindings in command line mode
 cnoremap <c-a> <home>
 cnoremap <c-e> <end>
-
-" Formatting, TextMate-style
-nnoremap Q gqip
-vnoremap Q gq
-
-" Select (charwise) the contents of the current line, excluding indentation.
-" Great for pasting Python lines into REPLs.
-nnoremap vv ^vg_
-
-" Keep search matches in the middle of the window.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-" Same when jumping around
-nnoremap g; g;zz
-nnoremap g, g,zz
-
-" Directory of current file.
-cnoremap %% <C-R>=expand("%:h")."/"<CR>
 
 " Map § to # for typing convenience
 set iminsert=1
@@ -141,11 +106,11 @@ lnoremap § #
 noremap Y y$
 
 " Visually select the text that was most recently edited/pasted.
-nmap gV `[v`]
+" nmap gV `[v`]
 
 " Make * and # work with visual selection.
-vnoremap <silent> * :call VisualSearch('f')<CR>
-vnoremap <silent> # :call VisualSearch('b')<CR>
+vnoremap <silent> * :call VisualSearch("f")<CR>
+vnoremap <silent> # :call VisualSearch("b")<CR>
 
 " indent, reselect
 :vmap < <gv
@@ -189,7 +154,6 @@ endif
 nmap <script> <silent> <unique> <Leader><Leader> :BufExplorer<CR>
 let g:bufExplorerShowRelativePath=1
 
-
 " key = value
 nmap <Leader>t= :Tabularize /=<CR>
 vmap <Leader>t= :Tabularize /=<CR>
@@ -197,8 +161,8 @@ vmap <Leader>t= :Tabularize /=<CR>
 nmap <Leader>t{ :Tabularize /{<CR>
 vmap <Leader>t{ :Tabularize /{<CR>
 " key => value
-nmap <Leader>t=> :Tabularize /><CR>
-vmap <Leader>t=> :Tabularize /><CR>
+nmap <Leader>t=> :Tabularize /=><CR>
+vmap <Leader>t=> :Tabularize /=><CR>
 " key: value
 nmap <Leader>t: :Tabularize /:\zs<CR>
 vmap <Leader>t: :Tabularize /:\zs<CR>
@@ -209,11 +173,6 @@ vmap <Leader>t: :Tabularize /:\zs<CR>
 nmap <Leader>t, :Tabularize /,\zs<CR>
 vmap <Leader>t, :Tabularize /,\zs<CR>
 
-
-" CTRL ]
-" g CTRL ]
-nmap <Leader>ts :tselect<CR>
-vmap <Leader>ts :tselect<CR>
 
 " a few useful shortcuts - taken from https://github.com/lsdr/vim-folder/blob/master/_vimrc :)
 command! Rehash source ~/.vimrc
@@ -237,54 +196,13 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" OPEN FILES IN DIRECTORY OF CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RENAME CURRENT FILE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
-endfunction
-map <leader>n :call RenameFile()<cr>
-
-map <leader>gg :topleft 100 :split Gemfile<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PROMOTE VARIABLE TO RSPEC LET
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! PromoteToLet()
-  :normal! dd
-  " :exec '?^\s*it\>'
-  :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-  :normal ==
-endfunction
-:command! PromoteToLet :call PromoteToLet()
-:map <leader>l :PromoteToLet<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! RunTests(filename)
   " Write the file and run tests for the given filename
-  " :w
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  " :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  if match(a:filename, '\.feature$') != -1
+  :w
+
+  if match(a:filename, "\.feature$") != -1
     exec ":!script/features " . a:filename
   else
     if filereadable("script/test")
@@ -329,17 +247,14 @@ function! RunTestFileNoRails()
 endfunction
 
 function! RunNearestTest()
-  let spec_line_number = line('.')
+  let spec_line_number = line(".")
   call RunTestFile(":" . spec_line_number . " -b")
 endfunction
 
 map <leader>s :call RunTestFile()<cr>
 map <leader>S :call RunNearestTest()<cr>
 map <leader>b :call RunTestFileNoRails()<cr>
-map <leader>a :call RunTests('spec')<cr>
-" map <leader>c :w\|:!script/features<cr>
-" map <leader>w :w\|:!script/features --profile wip<cr>
-
+map <leader>a :call RunTests("spec")<cr>
 
 " All functions bellow from https://github.com/vim-scripts/Specky
 "
@@ -351,9 +266,9 @@ map <leader>a :call RunTests('spec')<cr>
 " the top level directory of your project.
 
 function! SpecSwitcher()
-  " If we aren't in a ruby or rspec file then we probably don't care
+  " If we aren"t in a ruby or rspec file then we probably don"t care
   " too much about this function.
-  if &ft != 'ruby' && &ft != 'rspec'
+  if &ft != "ruby" && &ft != "rspec"
     call s:err( "Not currently in ruby or rspec mode." )
     return
   endif
@@ -370,29 +285,29 @@ function! SpecSwitcher()
   " directory structures.
   "
   " rubycode.rb ---> rubycode_spec.rb
-  let l:filename     = matchstr( bufname('%'), '[0-9A-Za-z_.-]*$' )
-  let l:is_spec_file = match( l:filename, '_spec.rb$' ) == -1 ? 0 : 1
+  let l:filename     = matchstr( bufname("%"), "[0-9A-Za-z_.-]*$" )
+  let l:is_spec_file = match( l:filename, "_spec.rb$" ) == -1 ? 0 : 1
 
   if l:is_spec_file
-    let l:other_file = substitute( l:filename, '_spec\.rb$', '\.rb', '' )
+    let l:other_file = substitute( l:filename, "_spec\.rb$", "\.rb", "" )
   else
-    let l:other_file = substitute( l:filename, '\.rb$', '_spec\.rb', '' )
+    let l:other_file = substitute( l:filename, "\.rb$", "_spec\.rb", "" )
   endif
 
   let l:bufnum = bufnr( l:other_file )
   if l:bufnum == -1
-    " The file isn't currently open, so let's search for it.
-    execute 'find ' . l:other_file
+    " The file isn"t currently open, so let"s search for it.
+    execute "find " . l:other_file
   else
     " We've already got an open buffer with this file, just go to it.
-    execute 'buffer' . l:bufnum
+    execute "buffer" . l:bufnum
   endif
-  "execute 'set path=' . l:orig_path
+  "execute "set path=" . l:orig_path
 endfunction
 
 nnoremap <leader>. :call SpecSwitcher()<cr>
 
-nnoremap <leader>dq :%s/'\([^"\|^']*\)'/"\1"/<cr>
+" nnoremap <leader>dq :%s/'\([^"\|^"]*\)"/"\1"/<cr>
 
 let g:ctrlp_custom_ignore = 'vendor/ruby/\|node_modules/\|tmp/|coverage/'
 " let g:ctrlp_custom_ignore = 'vendor/ruby/\|bin/\|node_modules/\|tmp/|coverage/'
@@ -404,13 +319,6 @@ let NERDDefaultNesting = 0
 let NERDSpaceDelims = 1
 let NERDRemoveExtraSpaces = 1
 
-" https://github.com/postmodern/chruby/wiki/Vim
-" https://github.com/postmodern/chruby/issues/196#issuecomment-23828010
-" set shell=$SHELL\ -l
-" set shell=zsh\ -i
-" set shellcmdflag=-ci
-" https://github.com/postmodern/chruby/issues/196#issuecomment-23826171
-" set shell=bash
 set shell=zsh
 
 " Automatically removing all trailing whitespace on save
@@ -420,29 +328,16 @@ autocmd BufWritePre * :%s/\s\+$//e
 " nnoremap <leader>ct :!`brew --prefix`/bin/ctags --tag-relative -Rf.git/tags --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
 nnoremap <leader>ct :! /Users/pablo/.git_template/hooks/ctags<cr>
 
-" brew install yajl
+" require brew install yajl
 command JsonVerify execute "! cat % | json_verify"
 command JsonBeautify execute "%! json_reformat"
 command JsonMinify execute "%! json_reformat -m"
 command EndpointVerify execute "!BUNDLE_GEMFILE=/Users/pablo/workspace/augury/Gemfile bundle exec /Users/pablo/workspace/augury/bin/validate --schema-path=/Users/pablo/workspace/augury_messages/lib/augury_messages/validators/schemas/endpoint/definition.json --json-path=%:p"
 
-command SudoW execute ":silent w !sudo tee %" | :edit!
-
-" let g:airline_section_b = '%{getcwd()} branch'
-" let g:airline_section_c = '%t'
+" Forgot sudo?
+cmap W w !sudo tee % >/dev/null
 
 " enable spell checking
-" http://www.danielmiessler.com/study/vim
-" # Go to the next misspelled word
-" ]s
-" # Go to the last misspelled word
-" [s
-" # When on a misspelled word, get some suggestions
-" z=
-" # Mark a misspelled word as correct
-" zg
-" # Mark a good word as misspelled
-" zw
 set spell
 hi clear SpellBad
 hi SpellBad cterm=underline
