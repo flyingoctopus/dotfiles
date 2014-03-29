@@ -73,8 +73,6 @@ set noequalalways                 " Resize windows as little as possible.
 
 set autoread                      " Automatically re-read files changed outside Vim.
 
-let g:AutoPairs = { '(': ')', '[': ']', '{': '}', "'": "'", '"': '"', '`': '`', '<': '>', '%': '%' }
-
 set t_Co=256
 set background=light
 colorscheme badwolf
