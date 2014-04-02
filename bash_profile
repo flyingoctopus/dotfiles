@@ -3,6 +3,8 @@ export PATH="/usr/local/git/bin:$PATH"
 export PATH="/Users/pablo/.cabal/bin:$PATH"
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+# https://www.rabbitmq.com/install-homebrew.html
+export PATH="$PATH:/usr/local/sbin"
 
 export NODE_PATH="/usr/local/bin/node"
 
