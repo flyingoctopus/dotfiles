@@ -174,7 +174,6 @@ vmap <Leader>t, :Tabularize /,\zs<CR>
 
 " a few useful shortcuts - taken from https://github.com/lsdr/vim-folder/blob/master/_vimrc :)
 command! Rehash source ~/.vimrc
-command! Helptags helptags ~/.vim/doc
 
 " all the code below from https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
 
@@ -254,6 +253,7 @@ map <leader>S :call RunNearestTest()<cr>
 map <leader>b :call RunTestFileNoRails()<cr>
 map <leader>a :call RunTests("spec")<cr>
 
+map <leader>r :! %<cr>
 " All functions bellow from https://github.com/vim-scripts/Specky
 "
 " When in ruby code or an rspec BDD file, try and search recursively through
@@ -327,13 +327,13 @@ autocmd BufWritePre * :%s/\s\+$//e
 nnoremap <leader>ct :! /Users/pablo/.git_template/hooks/ctags<cr>
 
 " require brew install yajl
-command JsonVerify execute "! cat % | json_verify"
-command JsonBeautify execute "%! json_reformat"
-command JsonMinify execute "%! json_reformat -m"
-command EndpointVerify execute "!BUNDLE_GEMFILE=/Users/pablo/workspace/augury/Gemfile bundle exec /Users/pablo/workspace/augury/bin/validate --schema-path=/Users/pablo/workspace/augury_messages/lib/augury_messages/validators/schemas/endpoint/definition.json --json-path=%:p"
+" command JsonVerify execute "! cat % | json_verify"
+" command JsonBeautify execute "%! json_reformat"
+" command JsonMinify execute "%! json_reformat -m"
+" command EndpointVerify execute "!BUNDLE_GEMFILE=/Users/pablo/workspace/augury/Gemfile bundle exec /Users/pablo/workspace/augury/bin/validate --schema-path=/Users/pablo/workspace/augury_messages/lib/augury_messages/validators/schemas/endpoint/definition.json --json-path=%:p"
 
 " Forgot sudo?
-cmap W w !sudo tee % >/dev/null
+command Sudow w !sudo tee % >/dev/null
 
 " enable spell checking
 set spell

@@ -42,3 +42,6 @@ source $ZSH/oh-my-zsh.sh
 
 unalias knife
 unsetopt correct_all
+
+# added by travis gem
+[ -f /Users/pablo/.travis/travis.sh ] && source /Users/pablo/.travis/travis.sh

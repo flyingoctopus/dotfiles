@@ -84,3 +84,6 @@ func git_hooks_remove() {
 func set_tmux_pane_title() {
   printf "\033]2;%s\033\\" "$*";
 }
+
+# added by travis gem
+[ -f /Users/pablo/.travis/travis.sh ] && source /Users/pablo/.travis/travis.sh
