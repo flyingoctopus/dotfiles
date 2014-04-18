@@ -5,7 +5,7 @@ alias bl="bundle list"
 alias bp="bundle package"
 alias bo="bundle open"
 alias bu="bundle update"
-alias bump="bundle update --source"
+# alias bump="bundle update --source"
 
 
 # The following is based on https://github.com/gma/bundler-exec
