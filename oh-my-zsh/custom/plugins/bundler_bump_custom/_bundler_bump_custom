@@ -9,13 +9,9 @@ _arguments -C \
 
 _bundle_gems() {
   if [ -f Gemfile ]; then
-    if [[ ! -f .bundle_gems~ ]]; then
-      (bundle list | awk '{print $2}' > .bundle_gems~)
-    fi
-
     OLD_IFS=$IFS
     IFS=$'\n'
-    _values 'available gems' $(< .bundle_gems~)
+    _values 'available gems' $(awk '/gem / {print $2}' Gemfile | sed 's/[^a-zA-Z0-9_-]//g')
     IFS=$OLD_IFS
   fi
 }
