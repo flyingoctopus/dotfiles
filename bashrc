@@ -74,3 +74,27 @@ func set_tmux_pane_title() {
 
 # added by travis gem
 [ -f /Users/pablo/.travis/travis.sh ] && source /Users/pablo/.travis/travis.sh
+
+# simple git log
+# usage glr v0.2.2 v0.2.3
+# https://github.com/addyosmani/dotfiles/blob/master/.functions
+function glr() {
+    git log $1 $2 --pretty=format:'* %h %s' --date=short --no-merges
+}
+
+# git log with per-commit cmd-clickable GitHub URLs (iTerm)
+# https://github.com/addyosmani/dotfiles/blob/master/.functions
+function gf() {
+  local remote="$(git remote -v | awk '/^origin.*\(push\)$/ {print $2}')"
+  if [[ -n "$remote" ]]
+  then
+    return
+  fi
+  local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
+  git log $* --name-status --color | awk "$(cat <<AWK
+    /^.*commit [0-9a-f]{40}/ {sha=substr(\$2,1,7)}
+    /^[MA]\t/ {printf "%s\thttps://github.com/$user_repo/blob/%s/%s\n", \$1, sha, \$2; next}
+    /.*/ {print \$0}
+AWK
+  )" | less -F
+}
