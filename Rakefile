@@ -41,7 +41,8 @@ task :install do
     end
   end
 
-  update_git_submodules
+  print 'update git submodules? [ynq] '
+  update_git_submodules if $stdin.gets.chomp == 'y'
 end
 
 desc 'update git submodules & oh-my-zsh'
@@ -86,15 +87,15 @@ def switch_to_zsh
   if ENV["SHELL"] =~ /zsh/
     puts "using zsh"
   else
-    print "switch to zsh? (recommended) [ynq] "
+    print 'switch to zsh? (recommended) [ynq] '
     case $stdin.gets.chomp
     when 'y'
-      puts "switching to zsh"
+      puts 'switching to zsh'
       system %Q{chsh -s `which zsh`}
     when 'q'
       exit
     else
-      puts "skipping zsh"
+      puts 'skipping zsh'
     end
   end
 end
@@ -113,7 +114,7 @@ def install_oh_my_zsh
     print 'install oh-my-zsh? [ynq] '
     case $stdin.gets.chomp
     when 'y'
-      puts "installing oh-my-zsh"
+      puts 'installing oh-my-zsh'
       system %Q{git clone https://github.com/robbyrussell/oh-my-zsh.git "$HOME/.oh-my-zsh"}
     when 'q'
       exit
@@ -122,4 +123,3 @@ def install_oh_my_zsh
     end
   end
 end
-
