@@ -339,3 +339,6 @@ command Sudow w !sudo tee % >/dev/null
 set spell
 hi clear SpellBad
 hi SpellBad cterm=underline
+
+" https://github.com/ggreer/the_silver_searcher
+let g:ackprg = 'ag --nogroup --nocolor --column'
