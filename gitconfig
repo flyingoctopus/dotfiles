@@ -14,9 +14,6 @@
 	ff = true
 [help]
   format = man
-[github]
-  token = 076a1854deea25b5e3712fe2ba7ffd59
-  user = phstc
 [alias]
   st = status
   ci = commit
