@@ -45,3 +45,6 @@ unsetopt correct_all
 
 # added by travis gem
 [ -f /Users/pablo/.travis/travis.sh ] && source /Users/pablo/.travis/travis.sh
+
+setopt auto_cd
+cdpath=($HOME $HOME/spree $HOME/workspace)
