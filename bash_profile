@@ -36,3 +36,7 @@ export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
+
+eval $(ssh-agent) > /dev/null
+# eval ssh-add "$HOME/.ssh/pablo@spreecommerce_id_rsa" > /dev/null
+

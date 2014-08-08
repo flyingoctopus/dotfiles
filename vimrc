@@ -73,6 +73,8 @@ set noequalalways                 " Resize windows as little as possible.
 
 set autoread                      " Automatically re-read files changed outside Vim.
 
+set so=999 " center scroll vertically for tabn, tabp
+
 set t_Co=256
 set background=light
 colorscheme badwolf
@@ -115,10 +117,14 @@ vnoremap <silent> # :call VisualSearch("b")<CR>
 :vmap > >gv
 
 " Use cursor keys to navigate buffers.
-map  <Right> :bnext<CR>
-map  <Left>  :bprev<CR>
-imap <Right> <ESC>:bnext<CR>
-imap <Left>  <ESC>:bprev<CR>
+" map  <Right> :bnext<CR>
+" map  <Left>  :bprev<CR>
+" imap <Right> <ESC>:bnext<CR>
+" imap <Left>  <ESC>:bprev<CR>
+map  <Right> :tabn<CR>
+map  <Left>  :tabp<CR>
+imap <Right> <ESC>:tabn<CR>
+imap <Left>  <ESC>:tabp<CR>
 map  <Del>   :bd<CR>
 
 " Show tabs and trailing whitespace visually
@@ -319,8 +325,16 @@ let NERDRemoveExtraSpaces = 1
 
 set shell=zsh
 
+function! LogLabuta(operation)
+  if expand('%') != "labuta.csv"
+    silent exec ":!echo `date`," . a:operation . ",%:p >> /Users/pablo/labuta.csv"
+  endif
+endfunction
+
 " Automatically removing all trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufReadPre * :call LogLabuta('BufReadPre')
+autocmd BufWritePre * :call LogLabuta('BufWritePre')
 
 " git_template/hooks/ctags
 " nnoremap <leader>ct :!`brew --prefix`/bin/ctags --tag-relative -Rf.git/tags --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
@@ -342,3 +356,10 @@ hi SpellBad cterm=underline
 
 " https://github.com/ggreer/the_silver_searcher
 let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" folding settings
+" set foldmethod=indent   "fold based on indent
+set foldmethod=manual
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use

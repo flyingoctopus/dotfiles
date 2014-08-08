@@ -98,3 +98,5 @@ function gf() {
 AWK
   )" | less -F
 }
+
+alias emacs='/usr/local/Cellar/emacs/24.3/Emacs.app/Contents/MacOS/Emacs -nw'

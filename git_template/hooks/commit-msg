@@ -1,11 +1,40 @@
-#!/bin/sh
+#!/usr/bin/env ruby
 
-# https://gist.github.com/phstc/b18aa5ff9616c9bf3bc2
+msg_file   = ARGV[0]
+commit_msg = File.read(msg_file).to_s.strip
 
-# BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
-# BRANCH_NAME_IN_MESSAGE="`cat $1 | egrep \"\[$BRANCH_NAME\] \"`"
+def empty_commit?(commit_msg)
+  return true if commit_msg.empty?
 
-# if [ "$1" != "" ] && [ -n "$BRANCH_NAME" ] && [ "$BRANCH_NAME_IN_MESSAGE" == "" ] && [ "$BRANCH_NAME" != "master" ]; then
-    # echo "[$BRANCH_NAME] $(cat $1)" > $1
-# fi
-echo $1
+  commit_msg.split("\n").each do |line|
+    # Lines starting with '#' will be ignored
+    return false if commit_msg.strip[0] != '#'
+  end
+
+  true
+end
+
+# if the commit was canceled (no message)
+exit 0 if empty_commit?(commit_msg)
+
+branch_name = `git rev-parse --abbrev-ref HEAD`.to_s
+
+# remove line break added by the system call above
+branch_name.chomp!
+
+# remove git flow branch prefixes
+branch_name.gsub!('feature/',  '')
+branch_name.gsub!('hotfix/',   '')
+
+# skip when develop or master branches
+# or when the branch name is already in the beginning of the commit msg
+if %w[develop master].include?(branch_name) || commit_msg.start_with?(branch_name)
+  File.open(msg_file, 'w') { |f| f.write commit_msg }
+  exit 0
+end
+
+# add the branch prefix following the Jira convention
+# https://confluence.atlassian.com/display/AOD/Processing+JIRA+issues+with+commit+messages
+commit_msg = "#{branch_name} #{commit_msg}"
+
+File.open(msg_file, 'w') { |f| f.write commit_msg }
