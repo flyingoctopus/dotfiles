@@ -29,7 +29,6 @@ branch_name.gsub!('hotfix/',   '')
 # skip when develop or master branches
 # or when the branch name is already in the beginning of the commit msg
 if %w[develop master].include?(branch_name) || commit_msg.start_with?(branch_name)
-  File.open(msg_file, 'w') { |f| f.write commit_msg }
   exit 0
 end
 
@@ -37,4 +36,5 @@ end
 # https://confluence.atlassian.com/display/AOD/Processing+JIRA+issues+with+commit+messages
 commit_msg = "#{branch_name} #{commit_msg}"
 
+# update the commit msg with the branch name
 File.open(msg_file, 'w') { |f| f.write commit_msg }
