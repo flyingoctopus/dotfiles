@@ -123,8 +123,12 @@ vnoremap <silent> # :call VisualSearch("b")<CR>
 " imap <Left>  <ESC>:bprev<CR>
 map  <Right> :tabn<CR>
 map  <Left>  :tabp<CR>
+map  <Up> :tabe<CR>
+map  <Down>  :tabc<CR>
 imap <Right> <ESC>:tabn<CR>
 imap <Left>  <ESC>:tabp<CR>
+imap <Up> <ESC>:tabe<CR>
+imap <Down>  <ESC>:tabc<CR>
 map  <Del>   :bd<CR>
 
 " Show tabs and trailing whitespace visually
@@ -363,3 +367,7 @@ set foldmethod=manual
 set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
+
+" hi TabLineFill ctermfg=LightGreen ctermbg=DarkGreen
+" hi TabLine ctermfg=Blue ctermbg=Yellow
+hi TabLineSel ctermfg=Red ctermbg=Yellow
