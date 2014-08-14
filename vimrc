@@ -353,6 +353,9 @@ nnoremap <leader>ct :! /Users/pablo/.git_template/hooks/ctags<cr>
 " Forgot sudo?
 command Sudow w !sudo tee % >/dev/null
 
+cabbrev Ackr Ack --ruby
+
+
 " enable spell checking
 set spell
 hi clear SpellBad
