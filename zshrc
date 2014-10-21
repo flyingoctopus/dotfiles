@@ -36,7 +36,7 @@ fi
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(bundler_custom bundler_bump_custom tmuxinator_custom capistrano_custom autojump git brew gem knife knife_ssh github heroku coffee golang vagrant chruby)
+plugins=(bundler_custom bundler_bump_custom tmuxinator_custom capistrano_custom brew gem knife knife_ssh github heroku coffee golang vagrant chruby git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -47,4 +47,11 @@ unsetopt correct_all
 [ -f /Users/pablo/.travis/travis.sh ] && source /Users/pablo/.travis/travis.sh
 
 setopt auto_cd
-cdpath=($HOME $HOME/spree $HOME/workspace)
+cdpath=($HOME $HOME/spree $HOME/workspace $HOME/go/src)
+
+alias gup='git up'
+alias gl='git lg'
+alias gp!='git push --force'
+
+# http://robots.thoughtbot.com/how-to-use-arguments-in-a-rake-task
+unsetopt nomatch

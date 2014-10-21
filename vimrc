@@ -329,16 +329,17 @@ let NERDRemoveExtraSpaces = 1
 
 set shell=zsh
 
-function! LogLabuta(operation)
-  if expand('%') != "labuta.csv"
-    silent exec ":!echo `date`," . a:operation . ",%:p >> /Users/pablo/labuta.csv"
-  endif
-endfunction
+" function! LogLabuta(operation)
+  " if expand('%') != "labuta.csv"
+    " silent exec ":!echo `date`," . a:operation . ",%:p >> /Users/pablo/labuta.csv"
+  " endif
+" endfunction
+
+" autocmd BufReadPre * :call LogLabuta('BufReadPre')
+" autocmd BufWritePre * :call LogLabuta('BufWritePre')
 
 " Automatically removing all trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
-autocmd BufReadPre * :call LogLabuta('BufReadPre')
-autocmd BufWritePre * :call LogLabuta('BufWritePre')
 
 " git_template/hooks/ctags
 " nnoremap <leader>ct :!`brew --prefix`/bin/ctags --tag-relative -Rf.git/tags --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
@@ -353,7 +354,7 @@ nnoremap <leader>ct :! /Users/pablo/.git_template/hooks/ctags<cr>
 " Forgot sudo?
 command Sudow w !sudo tee % >/dev/null
 
-cabbrev Ackr Ack --ruby
+cabbrev Ackr Ack --ruby -Q
 
 
 " enable spell checking

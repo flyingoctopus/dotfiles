@@ -43,6 +43,8 @@ alias tn='tmux new -s'
 # Result – Find all files that have a size >= 100MB
 # sudo find / -type f -size +100000k -exec ls -lh {} \; | awk '{ print $9 ": " $5 }'
 
+alias gup='git up'
+alias gl='git lg'
 
 func git_hooks_init() {
   if [ -d .git ]
@@ -75,13 +77,6 @@ func set_tmux_pane_title() {
 # added by travis gem
 [ -f /Users/pablo/.travis/travis.sh ] && source /Users/pablo/.travis/travis.sh
 
-# simple git log
-# usage glr v0.2.2 v0.2.3
-# https://github.com/addyosmani/dotfiles/blob/master/.functions
-function glr() {
-    git log $1 $2 --pretty=format:'* %h %s' --date=short --no-merges
-}
-
 # git log with per-commit cmd-clickable GitHub URLs (iTerm)
 # https://github.com/addyosmani/dotfiles/blob/master/.functions
 function gf() {
@@ -100,3 +95,12 @@ AWK
 }
 
 alias emacs='/usr/local/Cellar/emacs/24.3/Emacs.app/Contents/MacOS/Emacs -nw'
+
+function run() {
+  # run N echo 'running'
+  number=$1
+  shift
+  for i in `seq $number`; do
+    $@
+  done
+}
