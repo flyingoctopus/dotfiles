@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+$stdout.sync = true
+
+# ln -s ~/workspace/dotfiles/bin/gh /usr/local/bin
+
+remote = `git remote -v`.split("\n").map do |r|
+  # origin git@github.com:phstc/dotfiles.git (fetch)
+  # origin git@github.com:phstc/dotfiles.git (push)
+  m = /.+(github.com\:.+)\.git/.match(r)
+  m[1].sub ':', '/'
+end.uniq.first
+
+branch = `git branch`.split("\n").find do |b|
+  b.start_with? '*'
+end.sub('*', '').strip
+
+exec "open https://#{remote}/tree/#{branch}"
