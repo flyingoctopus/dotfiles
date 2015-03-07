@@ -21,6 +21,13 @@ alias influxdb="influxdb -config=/usr/local/etc/influxdb.conf"
 alias clean_queues="mongo augury_development --eval \"db.incoming.remove(); db.accepted.remove(); db.archived.remove()\""
 alias clean_persistence="mongo persistence_development --eval \"db.orders.remove(); db.users.remove(); db.products.remove(); db.stock_transfers.remove()\""
 
+alias mov2gif='rm -rf /tmp/mov2gif; mkdir /tmp/mov2gif; ffmpeg -i target.mov -vf scale=640:-1 -r 10 /tmp/mov2gif/ffout%3d.png; convert -delay 8 -loop 0 /tmp/mov2gif/ffout*.png ~/Desktop/target.gif'
+
+
+# alias csshxspree="sshx -l core $(cap staging aws:servers|xargs)"
+alias csshxspree='tmux-cssh -u core -ns $(be cap staging aws:servers)'
+
+
 alias ta='tmux attach-session -t'
 alias tl='tmux list-sessions'
 alias tn='tmux new -s'
@@ -103,4 +110,8 @@ function run() {
   for i in `seq $number`; do
     $@
   done
+}
+
+function set_story(){
+  echo "$1" > .pivotal_story_id
 }

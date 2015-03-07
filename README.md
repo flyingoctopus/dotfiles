@@ -12,3 +12,8 @@ Update git submodules.
 rake update
 ```
 
+To add vim plugins:
+
+```sh
+git submodule add https://github.com/scrooloose/syntastic.git vim/bundle/syntastic
+```

@@ -42,3 +42,7 @@
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f
+[git-up "fetch"]
+	all = false
+[git-up "bundler"]
+	check = true
