@@ -40,7 +40,7 @@ plugins=(bundler_custom bundler_bump_custom tmuxinator_custom capistrano_custom 
 
 source $ZSH/oh-my-zsh.sh
 
-unalias knife
+(type knife > /dev/null) && unalias knife
 unsetopt correct_all
 
 # added by travis gem

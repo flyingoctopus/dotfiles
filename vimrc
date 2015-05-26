@@ -117,18 +117,18 @@ vnoremap <silent> # :call VisualSearch("b")<CR>
 :vmap > >gv
 
 " Use cursor keys to navigate buffers.
-" map  <Right> :bnext<CR>
-" map  <Left>  :bprev<CR>
-" imap <Right> <ESC>:bnext<CR>
-" imap <Left>  <ESC>:bprev<CR>
-map  <Right> :tabn<CR>
-map  <Left>  :tabp<CR>
-map  <Up> :tabe<CR>
-map  <Down>  :tabc<CR>
-imap <Right> <ESC>:tabn<CR>
-imap <Left>  <ESC>:tabp<CR>
-imap <Up> <ESC>:tabe<CR>
-imap <Down>  <ESC>:tabc<CR>
+map  <Right> :bnext<CR>
+map  <Left>  :bprev<CR>
+imap <Right> <ESC>:bnext<CR>
+imap <Left>  <ESC>:bprev<CR>
+" map  <Right> :tabn<CR>
+" map  <Left>  :tabp<CR>
+" map  <Up> :tabe<CR>
+" map  <Down>  :tabc<CR>
+" imap <Right> <ESC>:tabn<CR>
+" imap <Left>  <ESC>:tabp<CR>
+" imap <Up> <ESC>:tabe<CR>
+" imap <Down>  <ESC>:tabc<CR>
 map  <Del>   :bd<CR>
 
 " Show tabs and trailing whitespace visually
@@ -202,68 +202,22 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING TESTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RunTests(filename)
-  " Write the file and run tests for the given filename
-  :w
+" map <leader>s :call RunTestFile()<cr>
+" map <leader>S :call RunNearestTest()<cr>
+" map <leader>b :call RunTestFileNoRails()<cr>
+" map <leader>a :call RunTests("spec")<cr>
 
-  if match(a:filename, "\.feature$") != -1
-    exec ":!script/features " . a:filename
-  else
-    if filereadable("script/test")
-      exec ":!script/test " . a:filename
-    elseif filereadable("Gemfile")
-      exec ":!SPEC_ALL=true bundle exec rspec --color " . a:filename
-    else
-      exec ":!SPEC_ALL=true rspec --color " . a:filename
-    end
-  end
-endfunction
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
-function! SetTestFile()
-  " Set the spec file that tests will be run for.
-  let t:grb_test_file=@%
-endfunction
+" let g:rspec_runner = "os_x_iterm2"
 
-function! RunTestFile(...)
-  if a:0
-    let command_suffix = a:1
-  else
-    let command_suffix = ""
-  endif
+" let g:rspec_command = ":!SPEC_ALL=true bundle exec rspec {spec}"
+" let g:rspec_command = "Dispatch! SPEC_ALL=TRUE bundle exec rspec {spec}"
+let g:rspec_command = 'call Send_to_Tmux("SPEC_ALL=true bundle exec rspec {spec}\n")'
 
-  " Run the tests for the previously-marked file.
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
-  if in_test_file
-    call SetTestFile()
-  elseif !exists("t:grb_test_file")
-    return
-  end
-  call RunTests(t:grb_test_file . command_suffix)
-endfunction
-
-function! RunTestFileNoRails()
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
-  if in_test_file
-    call SetTestFile()
-    :w
-    exec ":!rspec --color " . t:grb_test_file
-  end
-endfunction
-
-function! RunNearestTest()
-  let spec_line_number = line(".")
-  call RunTestFile(":" . spec_line_number . " -b")
-endfunction
-
-map <leader>s :call RunTestFile()<cr>
-map <leader>S :call RunNearestTest()<cr>
-map <leader>b :call RunTestFileNoRails()<cr>
-map <leader>a :call RunTests("spec")<cr>
-
-map <leader>r :! %<cr>
 " All functions bellow from https://github.com/vim-scripts/Specky
 "
 " When in ruby code or an rspec BDD file, try and search recursively through
@@ -388,3 +342,6 @@ let g:syntastic_check_on_wq = 0
 
 " let g:syntastic_ruby_checkers          = ['rubocop', 'mri']
 " let g:syntastic_ruby_rubocop_exec      = '/Users/pablo/.gem/ruby/2.0.0/bin/rubocop'
+
+" https://github.com/kien/ctrlp.vim/issues/174
+" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']

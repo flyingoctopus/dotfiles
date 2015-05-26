@@ -1,4 +1,3 @@
-alias wget="curl -O"
 alias rmdsstore="find . -name .DS_Store -exec rm {} \;"
 alias rmlogfiles="find . -name '*.log' -exec rm {} \;"
 alias vim="mvim -v"
@@ -52,6 +51,9 @@ alias tn='tmux new -s'
 
 alias gup='git up'
 alias gl='git lg'
+
+alias arspec='SPEC_ALL=true rspec'
+alias afrspec='arspec --fail-fast'
 
 func git_hooks_init() {
   if [ -d .git ]
@@ -114,4 +116,8 @@ function run() {
 
 function set_story(){
   echo "$1" > .pivotal_story_id
+}
+
+function git_clear(){
+  git branch --merged master | grep -v master | xargs git branch -d
 }

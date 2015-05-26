@@ -36,3 +36,4 @@ Berksfile.lock
 .powder
 local_tests
 .pivotal_story_id
+rubocop.html

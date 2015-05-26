@@ -64,3 +64,12 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule "vim/bundle/vim-rspec"]
+	path = vim/bundle/vim-rspec
+	url = git@github.com:thoughtbot/vim-rspec.git
+[submodule "vim/bundle/vim-dispatch"]
+	path = vim/bundle/vim-dispatch
+	url = git@github.com:tpope/vim-dispatch.git
+[submodule "vim/bundle/tslime"]
+	path = vim/bundle/tslime
+	url = git@github.com:jgdavey/tslime.vim.git
