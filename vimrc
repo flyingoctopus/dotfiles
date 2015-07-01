@@ -299,12 +299,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 " nnoremap <leader>ct :!`brew --prefix`/bin/ctags --tag-relative -Rf.git/tags --exclude=tmp  --exclude=.git --exclude=log . `bundle show --paths`<cr>
 nnoremap <leader>ct :! /Users/pablo/.git_template/hooks/ctags<cr>
 
-" require brew install yajl
-" command JsonVerify execute "! cat % | json_verify"
-" command JsonBeautify execute "%! json_reformat"
-" command JsonMinify execute "%! json_reformat -m"
-" command EndpointVerify execute "!BUNDLE_GEMFILE=/Users/pablo/workspace/augury/Gemfile bundle exec /Users/pablo/workspace/augury/bin/validate --schema-path=/Users/pablo/workspace/augury_messages/lib/augury_messages/validators/schemas/endpoint/definition.json --json-path=%:p"
-
 " Forgot sudo?
 command Sudow w !sudo tee % >/dev/null
 
@@ -345,3 +339,7 @@ let g:syntastic_check_on_wq = 0
 
 " https://github.com/kien/ctrlp.vim/issues/174
 " let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+au BufRead,BufNewFile *.tag :set filetype=html
+let g:syntastic_enable_html_checker = 1
+let g:syntastic_ignore_files = ['\.tag$']

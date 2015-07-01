@@ -49,9 +49,7 @@ unsetopt correct_all
 setopt auto_cd
 cdpath=($HOME $HOME/spree $HOME/workspace $HOME/go/src)
 
-alias gup='git up'
-alias gl='git lg'
-alias gp!='git push --force'
-
 # http://robots.thoughtbot.com/how-to-use-arguments-in-a-rake-task
 unsetopt nomatch
+
+alias gl='git lg'
