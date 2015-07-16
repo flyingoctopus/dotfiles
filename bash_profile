@@ -5,8 +5,10 @@ export PATH="/Users/pablo/.cabal/bin:$PATH"
 export PATH="/usr/local/heroku/bin:$PATH"
 # https://www.rabbitmq.com/install-homebrew.html
 export PATH="$PATH:/usr/local/sbin"
+export PATH="$PATH:/Users/pablo//terraform_0.6.0_darwin_386"
 
 export NODE_PATH="/usr/local/bin/node"
+
 
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_21.jdk/Contents/Home
 # http://wiki.apache.org/cassandra/GettingStarted

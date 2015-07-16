@@ -55,3 +55,5 @@ alias afrspec='arspec --fail-fast'
 alias iawriter="open -a 'iA Writer'"
 
 alias emacs='/usr/local/Cellar/emacs/24.3/Emacs.app/Contents/MacOS/Emacs -nw'
+
+alias tf='dotenv -f /Users/pablo/spree/.env_spree_fd terraform'
