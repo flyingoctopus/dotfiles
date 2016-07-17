@@ -43,15 +43,51 @@ AWK
   )" | less -F
 }
 
-function run() {
-  # run N echo 'running'
-  number=$1
-  shift
-  for i in `seq $number`; do
-    $@
-  done
-}
 
 function git_clear(){
+  git checkout master
   git branch --merged master | grep -v master | xargs git branch -d
+}
+
+function ce () {
+  if [[ $# -eq 1 ]] ; then
+    if [ -f ~/spree/env/"$1" ] ; then
+      set -a
+      . ~/spree/env/"$1"
+      if [[ "$1" == "none" ]] ; then
+        unset ce
+      else
+        export ce="$1"
+      fi
+      set +a
+    fi
+  else
+    local -a envs
+    envs=("${(f)$(ls ~/spree/env/)}")
+    for x in $envs; do
+      if [[ "$x" == "$ce" ]]; then
+        echo "* $x"
+      else
+        echo "  $x"
+      fi
+    done
+  fi
+}
+
+
+function ce_prompt () {
+  if [[ -n "$ce" ]]
+  then
+    echo "($ce) "
+  fi
+}
+
+function lmk() {
+  # https://brunobuccolo.com/be-notified-of-slow-shell-commands/
+  eval $*
+  osascript -e "display notification \"Done: $*\" with title \"lmk\" sound name \"Basso\""
+}
+
+function dynscan() {
+  dyn scan $(cf id dyn$1) | jq
 }

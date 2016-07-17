@@ -37,3 +37,6 @@ Berksfile.lock
 local_tests
 .pivotal_story_id
 rubocop.html
+
+# https://github.com/github/gitignore/blob/master/Global/Emacs.gitignore
+.\#*

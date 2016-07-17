@@ -3,15 +3,32 @@ $stdout.sync = true
 
 # ln -s ~/workspace/dotfiles/bin/gh /usr/local/bin
 
-remote = `git remote -v`.split("\n").map do |r|
+remote = `git remote -v`.split("\n").each_with_object([]) do |r, remotes|
   # origin git@github.com:phstc/dotfiles.git (fetch)
   # origin git@github.com:phstc/dotfiles.git (push)
-  m = /.+(github.com\:.+)\.git/.match(r)
-  m[1].sub ':', '/'
-end.uniq.first
+  if m = /.+(github.com\:.+)\.git/.match(r)
+    remotes << m[1].sub(':', '/')
+  end
+end.compact.uniq.first
+
+unless remote
+  puts 'No GitHub remote found'
+  exit 1
+end
 
 branch = `git branch`.split("\n").find do |b|
   b.start_with? '*'
 end.sub('*', '').strip
 
-exec "open https://#{remote}/tree/#{branch}"
+path = case ARGV[0]
+      when 'p'
+        '/pull/'
+      when 'c'
+        '/commits/'
+      else
+        '/tree/'
+      end
+
+url = "https://#{remote}#{path}#{branch}"
+
+exec "open #{url}"

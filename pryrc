@@ -13,9 +13,9 @@ Pry.config.exception_handler = proc do |output, exception, _|
 end
 
 if Pry.commands.collect(&:first).include?('continue')
-  Pry.commands.alias_command 'c', 'continue'
-  Pry.commands.alias_command 's', 'step'
-  Pry.commands.alias_command 'n', 'next'
+  # Pry.commands.alias_command 'c', 'continue'
+  # Pry.commands.alias_command 's', 'step'
+  # Pry.commands.alias_command 'n', 'next'
 end
 
 if defined?(Rails)
@@ -31,8 +31,8 @@ if defined?(Rails)
 end
 
 begin
-  require 'awesome_print'
-  Pry.config.print = proc { |output, value| Pry::Helpers::BaseHelpers.stagger_output("=> #{value.ai}", output) }
+  # require 'awesome_print'
+  # Pry.config.print = proc { |output, value| Pry::Helpers::BaseHelpers.stagger_output("=> #{value.ai}", output) }
 rescue LoadError => err
    warn '=> Unable to load awesome_print'
 end

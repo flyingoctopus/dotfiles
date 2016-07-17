@@ -20,6 +20,9 @@ then
   `brew --prefix`/bin/ctags --tag-relative -Rf.git/tags.$$ . `bundle show --paths`
 else
   `brew --prefix`/bin/ctags --tag-relative -Rf.git/tags.$$ .
+  # for emacs
+  # ctags -Re -f .
+  # emacsclient -e '(projectile-regenerate-tags)'
 fi
 
 # $$ is the current pid, which helps if two processes kick off at the same time.

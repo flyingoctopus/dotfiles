@@ -1,0 +1,3 @@
+#!/bin/sh
+# https://spreecommerce.slack.com/archives/D0254U0GA/p1466973801000034
+exec /usr/local/bin/emacsclient -q -n -c -a '' $*

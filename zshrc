@@ -29,18 +29,12 @@ DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
 
-# Customize to your needs...
-if [ -f ~/.bash_profile ]; then
-   source ~/.bash_profile
-fi
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(bundler_custom bundler_bump_custom tmuxinator_custom capistrano_custom brew gem knife knife_ssh github heroku coffee golang vagrant chruby git)
+plugins=(bundler_custom bundler_bump_custom capistrano_custom brew gem github heroku chruby)
 
 source $ZSH/oh-my-zsh.sh
 
-(type knife > /dev/null) && unalias knife
 unsetopt correct_all
 
 # added by travis gem
@@ -52,4 +46,11 @@ cdpath=($HOME $HOME/spree $HOME/workspace $HOME/go/src)
 # http://robots.thoughtbot.com/how-to-use-arguments-in-a-rake-task
 unsetopt nomatch
 
-alias gl='git lg'
+PROMPT='$(ce_prompt)%{$fg[green]%}%c%{$fg_bold[blue]%}$(git_prompt_info)%{$reset_color%} '
+
+# PROMPT='%F{blue}%T${CE:+ $CE} %F{magenta}${_ruby} %F{cyan}%~${vcs_info_msg_0_}%f%(!.#.$) '
+
+ZSH_THEME_GIT_PROMPT_PREFIX="("
+ZSH_THEME_GIT_PROMPT_SUFFIX=")"
+ZSH_THEME_GIT_PROMPT_DIRTY=" *"
+ZSH_THEME_GIT_PROMPT_CLEAN=""

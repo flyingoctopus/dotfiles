@@ -283,15 +283,6 @@ let NERDRemoveExtraSpaces = 1
 
 set shell=zsh
 
-" function! LogLabuta(operation)
-  " if expand('%') != "labuta.csv"
-    " silent exec ":!echo `date`," . a:operation . ",%:p >> /Users/pablo/labuta.csv"
-  " endif
-" endfunction
-
-" autocmd BufReadPre * :call LogLabuta('BufReadPre')
-" autocmd BufWritePre * :call LogLabuta('BufWritePre')
-
 " Automatically removing all trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 
@@ -342,4 +333,10 @@ let g:syntastic_check_on_wq = 0
 
 au BufRead,BufNewFile *.tag :set filetype=html
 let g:syntastic_enable_html_checker = 1
-let g:syntastic_ignore_files = ['\.tag$']
+let g:syntastic_ignore_files = ['\.tag$', '\.go$', '\.es6']
+
+let g:syntastic_coffee_coffeelint_args = "--reporter --file ~/.coffeelint.json"
+
+au BufRead,BufNewFile *.yml.sample setfiletype yaml
+au BufRead,BufNewFile *.es6 setfiletype javascript
+au BufRead,BufNewFile *.es6*.erb setfiletype javascript

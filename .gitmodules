@@ -73,3 +73,6 @@
 [submodule "vim/bundle/tslime"]
 	path = vim/bundle/tslime
 	url = git@github.com:jgdavey/tslime.vim.git
+[submodule "vim/bundle/vim-gitgutter"]
+	path = vim/bundle/vim-gitgutter
+	url = git@github.com:airblade/vim-gitgutter.git
