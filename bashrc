@@ -2,10 +2,10 @@ if [ -f ~/.aliases ]; then
    source ~/.aliases
 fi
 
-func git_hooks_init() {
+function git_hooks_init() {
   if [ -d .git ]
   then
-    ln -s ~/.git_template/hooks/* .git/hooks
+    ln -sf ~/.git_template/hooks .git/hooks
 
     # ~/.git_template/hooks/ctags will generate tags inside .git directory
     if [ -f tags ]
@@ -17,7 +17,7 @@ func git_hooks_init() {
   fi
 }
 
-func git_hooks_remove() {
+function git_hooks_remove() {
   if [ -d .git ]
   then
       rm .git/hooks/*
