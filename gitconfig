@@ -22,8 +22,9 @@
   df = diff
   b = branch -a
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an, %cr)%Creset' --abbrev-commit --date=relative
-	clean-branches = !git branch | grep -v master | xargs git branch -D
-	up = !git fetch && git rebase --autostash FETCH_HEAD
+  cleanup = !git branch | grep -v master | xargs git branch -D
+  recent = !git branch --sort=-committerdate | head 
+  sha = rev-parse --short HEAD
 [mergetool "diffmerge"]
 	cmd = /Applications/DiffMerge.app/Contents/MacOS/diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
   trustExitCode = true
@@ -37,8 +38,8 @@
   autosetupmerge = true
 [pull]
 	rebase = true
-[init]
-	templatedir = ~/.git_template
+# [init]
+#	templatedir = ~/.git_template
 [push]
 	default = current
 [filter "media"]

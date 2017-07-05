@@ -13,18 +13,19 @@ set -e
 # The trap command to catch the listed SIGNALS. If a signal is 0 or EXIT, the COMMANDS are executed when the shell exits.
 # http://redsymbol.net/articles/bash-exit-traps/
 # http://linux.die.net/Bash-Beginners-Guide/sect_12_02.html
-trap "rm -f .git/tags.$$" EXIT
+# trap "rm -f .git/tags.$$" EXIT
 
 if [ -f Gemfile ]
 then
-  `brew --prefix`/bin/ctags --tag-relative -Rf.git/tags.$$ . `bundle show --paths`
+  # `brew --prefix`/bin/ctags --tag-relative -Rf.git/tags.$$ . `bundle show --paths`
 else
-  `brew --prefix`/bin/ctags --tag-relative -Rf.git/tags.$$ .
-  # for emacs
-  # ctags -Re -f .
-  # emacsclient -e '(projectile-regenerate-tags)'
+  # `brew --prefix`/bin/ctags --tag-relative -Rf.git/tags.$$ .
 fi
+# ctags -Ref
+# emacsclient -e '(projectile-regenerate-tags)'
+
+ctagsupdate
 
 # $$ is the current pid, which helps if two processes kick off at the same time.
 # http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html#comment-995210438
-mv .git/tags.$$ .git/tags
+# mv .git/tags.$$ .git/tags

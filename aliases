@@ -1,26 +1,31 @@
 alias rmdsstore="find . -name .DS_Store -exec rm {} \;"
 alias rmlogfiles="find . -name '*.log' -exec rm {} \;"
 
-alias vim="mvim -v"
-
 alias arspec='SPEC_ALL=true rspec'
 
-alias iawriter="open -a 'iA Writer'"
+alias iawriter="open -a 'iA Writer Classic'"
 
-alias gst='git status'
-alias gl='git lg'
-alias gup='git up'
-alias gp='git push'
-alias gd='git diff'
-alias gc='git commit -v'
-alias gc!='git commit -v --amend'
-alias gca='git commit -v -a'
-alias gca!='git commit -v -a --amend'
-alias gco='git checkout'
-alias ga='git add'
-
+# alias gst='git status'
+# alias gl='git lg'
+# alias gup='git up'
+# alias gp='git push'
+# alias gd='git diff'
+# alias gc='git commit -v'
+# alias gc!='git commit -v --amend'
+# alias gca='git commit -v -a'
+# alias gca!='git commit -v -a --amend'
+# alias gco='git checkout'
+# alias ga='git add'
 
 alias ghp='gh p'
 alias ghc='gh c'
+alias gph='gp heroku master'
 
-alias fd='bundle exec bin/fd'
+alias ctags=/usr/local/bin/ctags
+
+alias ce='aws-vault exec -n'
+
+alias wget='curl -O'
+
+alias zipalign=/usr/local/Cellar/android-sdk/24.4.1_1/build-tools/23.0.2/zipalign
+

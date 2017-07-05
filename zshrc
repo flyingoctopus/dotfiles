@@ -4,6 +4,18 @@ source /usr/local/share/chruby/chruby.sh
 source /usr/local/share/chruby/auto.sh
 chruby $(cat ~/.ruby-version)
 
+if [ -f $HOME/.bash_profile ]; then
+  source $HOME/.bash_profile
+fi
+
+if [ -f $HOME/.bashrc ]; then
+  source $HOME/.bashrc
+fi
+
+if [ -f $HOME/.aliases ]; then
+  source $HOME/.aliases
+fi
+
 
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
@@ -28,17 +40,15 @@ DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
+BUNDLED_COMMANDS=(shoryuken)
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(bundler_custom bundler_bump_custom capistrano_custom brew gem github heroku chruby)
+plugins=(bundler_custom bundler_bump_custom capistrano_custom brew gem github heroku chruby git)
 
 source $ZSH/oh-my-zsh.sh
 
 unsetopt correct_all
-
-# added by travis gem
-[ -f /Users/pablo/.travis/travis.sh ] && source /Users/pablo/.travis/travis.sh
 
 setopt auto_cd
 cdpath=($HOME $HOME/spree $HOME/workspace $HOME/go/src)
@@ -47,8 +57,6 @@ cdpath=($HOME $HOME/spree $HOME/workspace $HOME/go/src)
 unsetopt nomatch
 
 PROMPT='$(ce_prompt)%{$fg[green]%}%c%{$fg_bold[blue]%}$(git_prompt_info)%{$reset_color%} '
-
-# PROMPT='%F{blue}%T${CE:+ $CE} %F{magenta}${_ruby} %F{cyan}%~${vcs_info_msg_0_}%f%(!.#.$) '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")"

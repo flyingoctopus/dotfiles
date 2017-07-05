@@ -6,6 +6,7 @@
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
 values."
+
   (setq-default
    ;; Base distribution to use. This is a layer contained in the directory
    ;; `+distribution'. For now available distributions are `spacemacs-base'
@@ -18,6 +19,9 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     csv
+     go
+     markdown
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -36,18 +40,20 @@ values."
      syntax-checking
      ;; version-control
      github
-     gtags
-     ruby
+     (ruby :variables
+           ruby-enable-enh-ruby-mode t
+           ruby-test-runner 'rspec)
      html
      javascript
      yaml
+     gtags
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   ;; dotspacemacs-additional-packages '(rspec-mode)
    dotspacemacs-additional-packages '(ag)
+   dotspacemacs-additional-packages '(counsel-rg)
    dotspacemacs-additional-packages '(inf-ruby)
    ;; dotspacemacs-additional-packages '(auto-complete)
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -254,6 +260,7 @@ values."
   (setq web-mode-css-indent-offset n) ; web-mode, css in html file
   (setq web-mode-code-indent-offset n) ; web-mode, js code in html file
   (setq css-indent-offset n) ; css-mode
+  (setq enh-ruby-bounce-deep-indent t)
   )
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
@@ -262,15 +269,19 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;; http://stackoverflow.com/a/6454077/464685
+  (setq ruby-insert-encoding-magic-comment nil)
   ;; use space instead of tab
   (setq indent-tabs-mode nil)
   ;; indent 2 spaces width
   (my-setup-indent 2)
-  ;; https://github.com/rlister/emacs.d/blob/master/lisp/evil-cfg.el#L119
-  ;; in magit start insert mode when editing commit messages
-  (evil-set-initial-state 'magit-log-edit-mode 'insert)
-  (evil-set-initial-state 'git-commit-mode 'insert)
+  ;; (persp-mode)
+  ;; (require 'persp-projectile))
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+  (setq exec-path (append exec-path '("/usr/local/bin")))
+  (setq exec-path-from-shell-check-startup-files nil)
   )
+
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -283,18 +294,31 @@ you should place your code here."
   ;; https://github.com/syl20bnr/spacemacs/blob/master/doc/FAQ.org#include-underscores-in-word-motions
   ;; For ruby
   (add-hook 'ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+  (add-hook 'enh-ruby-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
   ;; For Javascript
   (add-hook 'js2-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
-  '((ruby :variables ruby-test-runner 'rspec))
+  (add-hook 'coffeescript-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+  ;; For YAML
+  (add-hook 'yaml-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+  ;; For Web
+  (add-hook 'web-mode-hook#'(lambda () (modify-syntax-entry ?_ "w")))
+
   ;; http://emacs.stackexchange.com/a/14803
   (setq tags-add-tables nil)
   ;; https://gitlab.com/jnfrd/emacs-d/commit/1b478d879c4d7717339faaccfb28fe5ca3fc770b
   (add-to-list 'auto-mode-alist '("\\.es6\\'" . js2-mode))
-  (setq projectile-switch-project-action 'projectile-dired))
+  (setq projectile-switch-project-action 'projectile-dired)
+  ;; https://github.com/rlister/emacs.d/blob/master/lisp/evil-cfg.el#L119
+  ;; in magit start insert mode when editing commit messages
+  (evil-set-initial-state 'magit-log-edit-mode 'insert)
+  (evil-set-initial-state 'git-commit-mode 'insert)
+  ;; http://stackoverflow.com/a/30900018/464685
+  (setq vc-follow-symlinks t)
+  (setq neo-smart-open t)
+  )
 
 ;; https://github.com/syl20bnr/spacemacs/issues/6462
 (add-hook 'after-init-hook 'inf-ruby-switch-setup)
-(add-hook 'projectile-idle-timer-hook 'my-projectile-idle-timer-function)
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -303,8 +327,12 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol t)
  '(magit-commit-arguments nil)
- '(magit-log-arguments (quote ("--graph" "--decorate" "-n256"))))
+ '(magit-log-arguments (quote ("--graph" "--decorate" "-n256")))
+ '(package-selected-packages
+   (quote
+    (csv-mode enh-ruby-mode go-guru go-eldoc company-go go-mode mmm-mode markdown-toc markdown-mode gh-md yaml-mode ws-butler window-numbering which-key web-mode web-beautify uuidgen use-package toc-org tagedit spaceline powerline smeargle sass-mode ruby-test-mode robe restart-emacs rake pug-mode persp-mode pcre2el paradox spinner orgit org org-plus-contrib org-bullets open-junk-file neotree move-text minitest magit-gitflow magit-gh-pulls macrostep livid-mode skewer-mode simple-httpd link-hint less-css-mode json-mode js2-refactor multiple-cursors js2-mode info+ indent-guide hydra hungry-delete hl-todo highlight-indentation hide-comnt help-fns+ helm-themes helm-projectile helm-make projectile helm-gtags helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag haml-mode google-translate github-search gitattributes-mode git-timemachine git-messenger git-link gist ggtags flyspell-correct-helm flyspell-correct flycheck-pos-tip eyebrowse expand-region exec-path-from-shell evil-visual-mark-mode evil-unimpaired evil-surround evil-search-highlight-persist evil-nerd-commenter evil-mc evil-matchit evil-magit evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-anzu anzu emmet-mode dumb-jump f company-tern tern company-statistics column-enforce-mode coffee-mode chruby bundler inf-ruby bind-key auto-yasnippet yasnippet auto-compile packed aggressive-indent ace-window ace-link ace-jump-helm-line avy auto-complete company highlight smartparens bind-map evil undo-tree magit magit-popup git-commit with-editor gh marshal pcache s ht dash request helm helm-core async quelpa package-build spacemacs-theme volatile-highlights vi-tilde-fringe slim-mode scss-mode rvm ruby-tools rbenv rainbow-delimiters pos-tip popwin popup pkg-info lorem-ipsum logito linum-relative json-snatcher json-reformat js-doc jade-mode ido-vertical-mode highlight-parentheses highlight-numbers helm-swoop helm-mode-manager helm-gitignore helm-css-scss goto-chg golden-ratio github-clone github-browse-file gitconfig-mode flx-ido fill-column-indicator fancy-battery evil-visualstar evil-tutor evil-numbers evil-lisp-state evil-indent-plus evil-args eval-sexp-fu elisp-slime-nav diminish define-word dash-functional company-web clean-aindent-mode buffer-move bracketed-paste auto-highlight-symbol auto-dictionary adaptive-wrap ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

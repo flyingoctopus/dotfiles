@@ -1,6 +1,28 @@
-if [ -f ~/.aliases ]; then
-   source ~/.aliases
-fi
+# if [ -f ~/.aliases ]; then
+   # source ~/.aliases
+# fi
+
+function ctagsupdate {
+	ctags -eR -h=rb.rake --languages=Ruby \
+  --exclude=.git \
+  --exclude=node_modules \
+  --exclude=spec \
+  --exclude=node-acceptance \
+  --exclude=public \
+  --exclude=vendor \
+  --exclude=stylesheets \
+  --exclude=javascripts \
+  --exclude=assets \
+  --exclude=images \
+  --exclude=tmp \
+  --exclude=cache \
+  --exclude=themes \
+  --exclude=app/views \
+  --exclude=app/assets \
+  --exclude=.html,.erb,.js,.json,.yml,.scss,.css,.sass,.liquid,.coffee \
+  --exclude=.java \
+  --exclude=.jpg,.gif,.png,jpeg,.svg -f
+}
 
 function git_hooks_init() {
   if [ -d .git ]
@@ -43,42 +65,19 @@ AWK
   )" | less -F
 }
 
-
 function git_clear(){
   git checkout master
   git branch --merged master | grep -v master | xargs git branch -d
 }
 
-function ce () {
-  if [[ $# -eq 1 ]] ; then
-    if [ -f ~/spree/env/"$1" ] ; then
-      set -a
-      . ~/spree/env/"$1"
-      if [[ "$1" == "none" ]] ; then
-        unset ce
-      else
-        export ce="$1"
-      fi
-      set +a
-    fi
-  else
-    local -a envs
-    envs=("${(f)$(ls ~/spree/env/)}")
-    for x in $envs; do
-      if [[ "$x" == "$ce" ]]; then
-        echo "* $x"
-      else
-        echo "  $x"
-      fi
-    done
-  fi
+function fd() {
+	(cd ~/spree/spreeworks/ops && bundle exec bin/fd $*)
 }
 
-
 function ce_prompt () {
-  if [[ -n "$ce" ]]
+  if [[ -n "$AWS_VAULT" ]]
   then
-    echo "($ce) "
+    echo "($AWS_VAULT) "
   fi
 }
 
@@ -86,8 +85,4 @@ function lmk() {
   # https://brunobuccolo.com/be-notified-of-slow-shell-commands/
   eval $*
   osascript -e "display notification \"Done: $*\" with title \"lmk\" sound name \"Basso\""
-}
-
-function dynscan() {
-  dyn scan $(cf id dyn$1) | jq
 }

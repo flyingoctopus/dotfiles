@@ -40,3 +40,8 @@ rubocop.html
 
 # https://github.com/github/gitignore/blob/master/Global/Emacs.gitignore
 .\#*
+
+
+BrowserStackLocal
+
+.env
