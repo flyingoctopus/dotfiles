@@ -15,15 +15,8 @@
 [help]
   format = man
 [alias]
-  st = status
-  ci = commit
-  br = branch
-  co = checkout
-  df = diff
-  b = branch -a
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%an, %cr)%Creset' --abbrev-commit --date=relative
-  cleanup = !git branch | grep -v master | xargs git branch -D
-  recent = !git branch --sort=-committerdate | head 
+  recent = !git branch --sort=-committerdate | head
   sha = rev-parse --short HEAD
 [mergetool "diffmerge"]
 	cmd = /Applications/DiffMerge.app/Contents/MacOS/diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
